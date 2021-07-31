@@ -1,7 +1,9 @@
 package com.jacaceresf.graphqldemo;
 
 import com.jacaceresf.graphqldemo.beans.Food;
+import com.jacaceresf.graphqldemo.beans.Team;
 import com.jacaceresf.graphqldemo.services.FoodService;
+import com.jacaceresf.graphqldemo.services.TeamService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,7 +21,7 @@ public class GraphqlDemoApplication {
      * @return
      */
     @Bean
-    ApplicationRunner init(FoodService foodService) {
+    ApplicationRunner init(FoodService foodService, TeamService teamService) {
 
         return args -> {
             Stream.of("Pizza", "Spam", "Eggs", "Avocado", "Burger").forEach(
@@ -30,6 +32,15 @@ public class GraphqlDemoApplication {
                     }
             );
             foodService.getFoods().forEach(System.out::println);
+
+            Stream.of(new Team(null, "Los Angeles Lakers", "Los Angeles", 17),
+                    new Team(null, "Boston Celtics", "Boston", 17),
+                    new Team(null, "Golden State Warriors", "Oakland", 6),
+                    new Team(null, "Chicago Bulls", "Chicago", 6)).forEach(
+                    teamService::saveTeam
+            );
+
+            teamService.getTeams().forEach(System.out::println);
         };
     }
 

@@ -50,7 +50,7 @@ public class FoodService {
 
     @GraphQLQuery(name = "isGood")
     public boolean isGood(@GraphQLContext Food food) {
-        return goodFood.contains(food.getName());
+        return !goodFood.contains(food.getName());
     }
 
     /**
