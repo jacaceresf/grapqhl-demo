@@ -42,4 +42,5 @@ mutation {
   }
 }
 ```
-
+## References
+- https://developer.okta.com/blog/2020/01/31/java-graphql
